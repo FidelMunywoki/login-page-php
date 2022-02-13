@@ -19,11 +19,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
 </head>
 <body>
     <h1>Hello,  <?php echo $_SESSION['name']; ?></h1>
+    <p>PAGE UNDER DEVELOPMENT</p>
 
     <nav class= "home-nav">
     <button>
     <a href="logout.php">Logout</a>
     </button>
+    <br>
     <a href="change-password.php">Change Password?</a>
     </nav>
    
