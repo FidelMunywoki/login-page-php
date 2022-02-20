@@ -52,6 +52,21 @@
         placeholder = "User Name"> <br >
     <?php }?>
 
+    <!-- email input -->
+    <label for="">Email</label>
+    <?php if (isset($_GET['email'])) { ?>
+        <input type="text" 
+        name="email" 
+        placeholder = "email" 
+        value= "<?php echo $_GET['email']; ?>"> <br >
+     
+     <?php }else { ?>
+        <input type="text" 
+        name="email" 
+        placeholder = "email"> <br >
+    <?php }?>
+
+
 
 
     <label for="">Password</label>
