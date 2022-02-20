@@ -16,6 +16,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])
 
     $name = validate($_POST['name']);
     $re_password = validate($_POST['re_password']);
+    $email = validate($_POST['email']);
 
     $user_data = 'uname ='. $uname. '&name ='. $name;
 
@@ -41,12 +42,27 @@ if (isset($_POST['uname']) && isset($_POST['password'])
         exit();
     }
 
+    // validate email
+    else if(empty($email)) {
+        header("Location: signup.php?error=email is required");
+        exit();
+
+         
+    } 
+    // check if e-mail address is well-formed
+    else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            
+        header("Location: signup.php?error=Invalid email format&$user_data");
+        exit();
+      }
+  
     else if($password !== $re_password) {
         header("Location: signup.php?error=The confirmation password does not match&$user_data");
         exit();
     }
 
     else {
+        
 
         //hashing the password
 
@@ -62,7 +78,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])
         } else {
             // inserting data after verification to db
 
-            $sql2 = "INSERT INTO users(user_name, password,name) VALUES('$uname','$password','$name')";
+            $sql2 = "INSERT INTO users(user_name, password,name,email) VALUES('$uname','$password','$name', '$email')";
             $result2 = mysqli_query($conn, $sql2);
             if ($result2) {
                 header("Location: signup.php?success=The account has been created successfully");
